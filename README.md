@@ -1,5 +1,9 @@
 # My Python projects
 
-pynumber.py => a simple python script that finds all prime numbers given a certain range.
+Python projects are seperated into folders:
 
-snakeGame.py => A retro snake game fun to play when you are bored. 
+1. django
+2. games
+  1. snakeGame.py (retro snake game using pygame)
+3. scripts
+  1. primeNumber.py (calculate all prime numbers)
