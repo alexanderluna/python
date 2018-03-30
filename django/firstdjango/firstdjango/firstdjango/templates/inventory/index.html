@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>New Index view</h1>
+
+{% for item in items %}
+<h2>{{ item.title }}</h2>
+<p>{{ item.description }}</p>
+<p>{{ item.amount }}</p>
+<a href="{% url 'item-detail' item.id %}">Item</a>
+{% endfor %}
+
+{% endblock content %}
