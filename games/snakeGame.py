@@ -18,18 +18,18 @@ playSurface = pygame.display.set_mode((720, 480))
 pygame.display.set_caption("Snake Game")
 
 # set colors
-red = pygame.Color(255, 0, 0) # game over
-green = pygame.Color(0, 255, 0) # snake
-black = pygame.Color(40, 40, 40) #screen
-white = pygame.Color(255, 255, 255) #score
-purple = pygame.Color(128,0,128) #food
+red = pygame.Color(255, 0, 0)  # game over
+green = pygame.Color(0, 255, 0)  # snake
+black = pygame.Color(40, 40, 40)  # screen
+white = pygame.Color(255, 255, 255)  # score
+purple = pygame.Color(128, 0, 128)  # food
 
 # FPS controller
 fpsController = pygame.time.Clock()
 
 # Import variables
-snakePos = [100,50]
-snakeBody = [[100, 50],[90, 50],[80,50]]
+snakePos = [100, 50]
+snakeBody = [[100, 50], [90, 50], [80, 50]]
 
 # Food position
 foodPos = [random.randrange(1, 72)*10, random.randrange(1, 48)*10]
@@ -43,7 +43,7 @@ over = False
 direction = 'RIGHT'
 changeTo = direction
 
-# define gameOver logic
+
 def gameOver():
     showScore(True)
     myFont = pygame.font.SysFont('monaco', 72)
@@ -54,10 +54,10 @@ def gameOver():
 
     pygame.display.flip()
     time.sleep(5)
-    pygame.quit() #pygame exit
-    sys.exit() #console exit
+    pygame.quit()  # pygame exit
+    sys.exit()  # console exit
 
-# render score
+
 def showScore(over=False):
     myFont = pygame.font.SysFont('monaco', 28)
     scoreColor = myFont.render("Score: " + str(round(score, 2)), True, green)
@@ -68,36 +68,32 @@ def showScore(over=False):
         scoreRect.midtop = (80, 10)
     playSurface.blit(scoreColor, scoreRect)
 
-# game loop
-while True:
-    # listen to events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
-                changeTo = 'RIGHT'
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
-                changeTo = 'LEFT'
-            if event.key == pygame.K_UP or event.key == ord('w'):
-                changeTo = 'UP'
-            if event.key == pygame.K_DOWN or event.key == ord('s'):
-                changeTo = 'DOWN'
-            if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.Event(pygame.QUIT))
 
-    # make sure snake can't go opposite direction
-    if changeTo == 'RIGHT' and not direction == 'LEFT':
-        direction = 'RIGHT'
-    if changeTo == 'LEFT' and not direction == 'RIGHT':
-        direction = 'LEFT'
-    if changeTo == 'UP' and not direction == 'DOWN':
-        direction = 'UP'
-    if changeTo == 'DOWN' and not direction == 'UP':
-        direction = 'DOWN'
+def getNextMovement(key):
+    if key == pygame.K_RIGHT or key == ord('d'):
+        return 'RIGHT'
+    if key == pygame.K_LEFT or key == ord('a'):
+        return 'LEFT'
+    if key == pygame.K_UP or key == ord('w'):
+        return 'UP'
+    if key == pygame.K_DOWN or key == ord('s'):
+        return 'DOWN'
+    if key == pygame.K_ESCAPE:
+        pygame.event.post(pygame.event.Event(pygame.QUIT))
 
-    # move the snake
+
+def getDirection(current, next):
+    if next == 'RIGHT' and not current == 'LEFT':
+        return 'RIGHT'
+    if next == 'LEFT' and not current == 'RIGHT':
+        return 'LEFT'
+    if next == 'UP' and not current == 'DOWN':
+        return 'UP'
+    if next == 'DOWN' and not current == 'UP':
+        return 'DOWN'
+
+
+def moveSnake():
     if direction == 'RIGHT':
         snakePos[0] += 10
     if direction == 'LEFT':
@@ -106,6 +102,18 @@ while True:
         snakePos[1] -= 10
     if direction == 'DOWN':
         snakePos[1] += 10
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            changeTo = getNextMovement(event.key)
+
+    direction = getDirection(direction, changeTo)
+    moveSnake()
 
     # grow Snake body after eating
     snakeBody.insert(0, list(snakePos))
@@ -117,7 +125,7 @@ while True:
         score -= 0.01
 
     # update food position after eating
-    if foodRendered == False:
+    if foodRendered is False:
         foodPos = [random.randrange(1, 72)*10, random.randrange(1, 48)*10]
     foodRendered = True
 
