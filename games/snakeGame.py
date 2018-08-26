@@ -32,7 +32,7 @@ snakePos = [100, 50]
 snakeBody = [[100, 50], [90, 50], [80, 50]]
 
 # Food position
-foodPos = [random.randrange(1, 72)*10, random.randrange(1, 48)*10]
+foodPos = [random.randrange(1, 72) * 10, random.randrange(1, 48) * 10]
 foodRendered = True
 
 # game score
@@ -126,7 +126,7 @@ while True:
 
     # update food position after eating
     if foodRendered is False:
-        foodPos = [random.randrange(1, 72)*10, random.randrange(1, 48)*10]
+        foodPos = [random.randrange(1, 72) * 10, random.randrange(1, 48) * 10]
     foodRendered = True
 
     playSurface.fill(black)
