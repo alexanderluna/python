@@ -9,17 +9,39 @@ Python projects are seperated into folders:
   1. primeNumber.py (calculate all prime numbers)
 To work with pipenv create a new folder
 
+
+## Working with pipenv
+
+``` bash
 mkdir something-new
 cd something-new
 
-now install what you need with pipenv:
+# create new environment with latest python3
+pipenv --three
 
+# install package
 pipenv install django
 
-this creates a pipfile and and lock file.
+# install from requirements.txt
+pipenv install -r requirements.txt
 
-To create a local shell run:
+# update outdated packages
+pipenv update --outdated
 
+# run a shell
 pipenv shell
+```
 
 finally to exit the shell just type 'exit'
+
+We can also create scripts similar to how we would using npm/yarn.
+For that we create a new section inside the generated Pipfile called sripts
+and specify the name followed by the command:
+```Pipfile
+[scripts]
+start = "python manage.py runserver"
+```
+
+```bash
+pipenv run start
+```
