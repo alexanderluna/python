@@ -7,8 +7,6 @@ Python projects are seperated into folders:
   1. snakeGame.py (retro snake game using pygame)
 3. scripts
   1. primeNumber.py (calculate all prime numbers)
-To work with pipenv create a new folder
-
 
 ## Working with pipenv
 
