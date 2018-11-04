@@ -77,3 +77,47 @@ start = "python manage.py runserver"
 ```bash
 pipenv run start
 ```
+
+### Working with Docker
+
+I prefer docker mainly for the reason that it is easier to get started and
+replicate. I use a docker-compose file to install the required modules and start
+a development server or run the code:
+
+```docker
+version: '3'
+
+services:
+  django:
+    image: python:3.7-alpine
+    volumes:
+     - pip37:/usr/local/lib/python3.7/site-packages
+     - .:/project
+    ports:
+      - "8000:8000"
+    working_dir: /project
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - requirements
+
+  requirements:
+    image: python:3.7-alpine
+    volumes:
+      - pip37:/usr/local/lib/python3.7/site-packages
+      - .:/project
+    working_dir: /project
+    command: pip install -r requirements.txt
+
+volumes:
+  pip37:
+    external: true
+```
+
+I could run container, attach a named volume and install the packages I need
+first and then use the same named volume in my docker compose to reduce the
+number of services but this would mean more steps so I opted for the double
+service variant which can be executed with a simple:
+
+```bash
+docker-compose up
+```
