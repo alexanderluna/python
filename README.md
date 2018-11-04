@@ -9,6 +9,7 @@
 - [My Goals with Python](#my-goals-with-python)
 - [Development Setup](#development-setup)
     - [Working with pipenv](#working-with-pipenv)
+    - [Working with Docker](#working-with-docker)
 - [Projects](#)
     - [Django](/django)
     - [Flask](/flask)
