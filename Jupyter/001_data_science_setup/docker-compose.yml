@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  python:
+    image: python:3.8
+    volumes:
+      - pip38bin:/usr/local/bin/
+      - pip38:/usr/local/lib/python3.8/site-packages
+      - .:/project
+    ports:
+      - "8888:8888"
+    working_dir: /project
+    command: jupyter notebook --no-browser --ip=0.0.0.0 --port=8888 --allow-root
+    depends_on:
+      - requirements
+
+  requirements:
+    image: python:3.8
+    volumes:
+      - pip38bin:/usr/local/bin/
+      - pip38:/usr/local/lib/python3.8/site-packages
+      - .:/project
+    working_dir: /project
+    command: pip install -r requirements.txt
+
+volumes:
+  pip38bin:
+    external: true
+  pip38:
+    external: true
