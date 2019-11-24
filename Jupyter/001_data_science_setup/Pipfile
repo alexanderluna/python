@@ -13,5 +13,8 @@ scikit-learn = "*"
 jupyter = "*"
 jupyterthemes = "*"
 
+[scripts]
+start = "jupyter notebook"
+
 [requires]
 python_version = "3.7"
