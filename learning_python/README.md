@@ -9,11 +9,13 @@
   - [Functions](#functions)
   - [Modules](#modules)
   - [Function quirks](#function-quirks)
-  - [Web ApplicationsP](#web-applicationsp)
+  - [Web Applications](#web-applications)
   - [Read and Write to Files](#read-and-write-to-files)
   - [Databases](#databases)
   - [Classes](#classes)
   - [Context Management Protocol](#context-management-protocol)
+  - [Sessions and Cookies](#sessions-and-cookies)
+  - [Decorators](#decorators)
 
 ## Introduction
 
@@ -183,7 +185,7 @@ always. Mutables objects such as Dictionaries, Lists and Sets are passed
 **by-reference** and Immutable objects such as Strings, Integers and Tuples are
 passed **by-value**.
 
-## Web ApplicationsP
+## Web Applications
 
 Python comes with various modules that allow us to create web apps from scratch
 but usually we do ourselves a favor by using pre-existing framework such as
@@ -396,4 +398,90 @@ it with the with statement.
 with MyDatabase(config_dictionary) as cursor:
   _sql = """some sql query"""
   cursor.execute(_sql, some_values)
+```
+
+## Sessions and Cookies
+
+When working with state in web apps we can't use global variables and the likes
+to save state. Instead, we have to use a session with a cookie. In flask we can
+import the session module for that.
+
+```python
+from flask import Flask, session
+
+app.secret_key = 'our super secret key to encrypt our cookies'
+
+@app.route('/user/<user>')
+def setUser(user: str):
+  session['user'] = user
+```
+
+The secret is set to encrypt the cookie before sending it to the browser. We can
+check if a user is logged in with a function or a decorator.
+
+## Decorators
+
+A decorator allows us to ammend a function without changing the function. To
+understand decorators we need to cover some ground first. A function take another function as an argument specifically we pass a function object.
+
+```python
+def apply(function: object, value: object) -> object:
+  return function(value)
+```
+
+A function can contain another function
+
+```python
+def hello():
+  def goodbye():
+    print(' and goodbye')
+  print('hello')
+  goodbye()
+```
+
+Finally, a function can accept a varying list of arguments
+
+```python
+def my_function(*args):
+  for arg in args:
+    print(arg)
+
+args = [1,2,'hello','bye']
+
+my_function(args) # [1,2,'hello','bye']
+my_function(*args) # 1,2,'hello','bye'
+```
+
+It is also possible to accept arbitrary keyword arguments.
+
+```python
+def my_function(**kwargs):
+  for key, value in kwargs.items():
+    print(key, value)
+```
+
+Now we can define a decorator. A decorator is a function that takes the
+decorated function as an argument and returns a new function with the same
+signature as the decorated function.
+
+```python
+def check_logged_in(func):
+  def wrapper(*args, **kwargs):
+    if 'logged_in' in session:
+      return func(*args, **kwargs)
+    return 'not logged in'
+  return wrapper
+```
+
+This works because a function identifies itself but it is possible for a
+function to forget its identity which is why we can use a module to handle the
+details.
+
+```python
+from functools import wraps
+
+def check_logged_in(func):
+  @wrap(func)
+  def wrapper(*args, **kwargs):
+  # ...
 ```
