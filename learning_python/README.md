@@ -16,6 +16,8 @@
   - [Context Management Protocol](#context-management-protocol)
   - [Sessions and Cookies](#sessions-and-cookies)
   - [Decorators](#decorators)
+  - [Exception handling](#exception-handling)
+  - [Threading](#threading)
 
 ## Introduction
 
@@ -484,4 +486,52 @@ def check_logged_in(func):
   @wrap(func)
   def wrapper(*args, **kwargs):
   # ...
+```
+
+## Exception handling
+
+When writting code its important to not just catch errors but also decide what
+to do once an error occures.
+
+```python
+try:
+  get_api_data()
+except FailedApiFetching:
+  print('Could not fetch data from API')
+except Exception as err:
+  print(str(err))
+```
+
+The idea is to fail gracefully. We can declare our own exception by creating an
+empty class which inherits from the Exception class.
+
+```python
+class FailedApiFetching(Exception):
+  pass
+```
+
+Although our class looks emtpy we are actually inheriting all the Exception
+functionality from the Exception class which means our custom exception will
+behave like any of python's built in exceptions.
+
+## Threading
+
+In python we can work with concurrent code thanks to the Threading module.
+
+```python
+from threading import Thread
+```
+
+To create a thread we create a Thread object. The object takes a target which is
+the function to execute and args which are the arguments to pass to the
+function.
+
+```python
+td = Thread(target=runMe, args=(time, job))
+```
+
+The result is a Thread object with our Thread which can be executed.
+
+```python
+td.start()
 ```
