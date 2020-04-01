@@ -2,7 +2,6 @@
 
 [__VIEW COURSE ON UDACITY =>__](https://www.udacity.com/course/programming-foundations-with-python--ud036)
 
-
 My repo for the programming fundamentals with Python Udacity course. Repo Index:
 
 1. [Installing Python](#install)
@@ -14,19 +13,19 @@ My repo for the programming fundamentals with Python Udacity course. Repo Index:
 7. [Profanity Editor](profanity_editor/README.md)
 8. [Movie Website](movie_webpage/README.md)
 
-
-## <a name="install">Install Python</a>
+## Install Python
 
 Install homebrew:
 
-```
+```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 Install python 3:
 
-```
+```bash
 brew install python3
 ```
 
-If you have problems installing python3 in MacOS High Sierra read this [stackoverflow post](https://stackoverflow.com/questions/47255517/brew-install-python3-didnt-install-pip3)
+If you have problems installing python3 in MacOS High Sierra read this
+[stackoverflow post](https://stackoverflow.com/questions/47255517/brew-install-python3-didnt-install-pip3)
