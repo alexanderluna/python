@@ -3,12 +3,10 @@
 > Python is a programming language that lets you work more quickly and
 > integrate your systems more effectively. - [Python.org](https://www.python.org)
 
-## Index
-
 - [Python](#python)
-  - [Index](#index)
   - [Why Python](#why-python)
   - [My Goals with Python](#my-goals-with-python)
+  - [Learning Python](#learning-python)
   - [Development Setup](#development-setup)
     - [Working with pipenv](#working-with-pipenv)
     - [Working with Docker](#working-with-docker)
@@ -29,6 +27,10 @@ language revolves aronud web development and data science:
 - Flask
 - Data Science (Pandas, Numpy, Pytorch, etc.)
 - Pygame
+
+## [Learning Python](/learning_python)
+
+Resources, steps and notes I take to learn python.
 
 ## Development Setup
 
