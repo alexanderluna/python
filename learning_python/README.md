@@ -18,6 +18,7 @@ to learn and keep learning python.
 9. [Exceptions](009_Exceptions.md)
 10. [Threading](010_Threading.md)
 11. [Comprehension and Generators](011_Comprehension_Generators.md)
+12. [Testing](012_Testing.md)
 
 ## Resources
 
