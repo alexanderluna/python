@@ -61,3 +61,48 @@ a regular expression which specifies a view. The view in turn, accesses the
 database through the model and sends a styled template to the user. Each app has
 its own `urls.py` file with urls matching routes within the app. We include the
 app specific `urls.py` file into the project's `urls.py` file.
+
+We define an `urls.py` file for each app and within our `views.py` we add the
+logic required to render the correct templates.
+
+```python
+# views.py
+from django.views.generic import TemplateView
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+```
+
+```python
+# pages/urls.py
+from .views import HomePageView, AboutPageView
+
+urlpatterns = [
+    path('', HomePageView.as_view(), name='home'),
+]
+```
+
+## Testing our Apps
+
+In order to make our code robust, we can use the build in testing tools and the
+auto generated `test.py` file.
+
+## Deploy on Heroku
+
+We have to tell heroku to ignore static files given that django optimizes them
+for us.
+
+```bash
+cd django
+
+heroku create
+
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+git push heroku master
+
+heroku ps:scale web=1
+
+heroku open
+```
