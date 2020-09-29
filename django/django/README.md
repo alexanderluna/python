@@ -83,6 +83,26 @@ urlpatterns = [
 ]
 ```
 
+## Generating Models
+
+Each app has its own `models.py` file. We can create our models there. Everytime
+we update our models file we have to create a migration with `makemigrations`
+and then we run our migration with the `migrate` command.
+
+```bash
+python manage.py makemigrations posts
+python manage.py migrate
+```
+
+## Django Admin
+
+Django comes with a build in CMS that allows us to interact with our data
+easily. To being, we have to create a superuser who can login.
+
+```bash
+python manage.py createsuperuser
+```
+
 ## Testing our Apps
 
 In order to make our code robust, we can use the build in testing tools and the
