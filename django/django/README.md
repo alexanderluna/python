@@ -108,6 +108,42 @@ python manage.py createsuperuser
 In order to make our code robust, we can use the build in testing tools and the
 auto generated `test.py` file.
 
+## Working with Forms
+
+In order to work with forms, we have to create a view with a template as we are
+used to. In our `views.py` we have to whitelist the database fields we want to
+expose.
+
+```python
+from django.views.generic.edit import CreateView
+
+class BlogCreateView(CreateView):
+    model = Post
+    template_name = 'post_new.html'
+    fields = ['title', 'author', 'body']
+
+```
+
+Inside our template, we can render the fields and protect againt XSS attacks as
+follows.
+
+```html
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+```
+
+After submiting our form, django doesn't know where it should redirect the user
+to. Thus we have to specify a url inside our database model class.
+
+```python
+class Post(models.Model):
+  # ...
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+```
+
 ## Deploy on Heroku
 
 We have to tell heroku to ignore static files given that django optimizes them
