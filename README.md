@@ -23,10 +23,10 @@ amount of online resources is large and well documented.
 Due to the large range of application for Python my main focus with this
 language revolves aronud web development and data science:
 
-- Django
-- Flask
-- Data Science (Pandas, Numpy, Pytorch, etc.)
-- Pygame
+- [Django](/django)
+- [Flask](/flask)
+- [Data Science](/jupyter)
+- [Pygame](/games)
 
 ## [Learning Python](/learning_python)
 
