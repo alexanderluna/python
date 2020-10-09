@@ -144,6 +144,64 @@ class Post(models.Model):
         return reverse('post_detail', args=[str(self.id)])
 ```
 
+## Working with Static Files
+
+Django doesn't serve static files in production. Instead, we have to compile
+all static files into a directory for deployment. For that we configure our
+project in `settings.py`
+
+```python
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+```
+
+Now we can run the `collectstatic` command to compile all static files into one
+directory.
+
+```bash
+python manage.py collectstatic
+```
+
+In order to server our static files directory in production we can use the
+`whitenoise` package.
+
+```bash
+pipenv install whitenoise==5.1.0
+```
+
+We have to make some changes to use whitenoise in our project. In `settings.py`
+
+```python
+# 1) add whitenoise before staticfiles
+INSTALLED_APPS = [
+    ...,
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
+]
+
+# 2) add whitenoise middleware
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+
+# 3) change the static files storage method
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+```
+
+Finally we have to compile our static files again.
+
+```bash
+pipenv install whitenoise==5.1.0
+```
+
 ## Deploy on Heroku
 
 We have to tell heroku to ignore static files given that django optimizes them
@@ -161,4 +219,10 @@ git push heroku master
 heroku ps:scale web=1
 
 heroku open
+```
+
+Now its time to change our default web server for a production web server
+
+```bash
+pipenv install gunicorn==19.9.0
 ```
