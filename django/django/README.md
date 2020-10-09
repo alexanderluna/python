@@ -212,6 +212,7 @@ cd django
 
 heroku create
 
+# skip this step if you configured your static files
 heroku config:set DISABLE_COLLECTSTATIC=1
 
 git push heroku master
