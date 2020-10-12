@@ -6,6 +6,11 @@
 > without needing to reinvent the wheel. It’s free and open source.
 > [django project](https://www.djangoproject.com)
 
+## Projects
+
+- [blog: learn by building](./blog)
+- [news: custom models](./news)
+
 ## Requirement
 
 - python 3.9

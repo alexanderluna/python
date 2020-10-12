@@ -7,6 +7,17 @@ requirements:
 - django 3.1+
 - pyenv (optional)
 
+- [Django App](#django-app)
+  - [Getting Started](#getting-started)
+  - [Creating an App](#creating-an-app)
+  - [Django Fundamentals](#django-fundamentals)
+  - [Generating Models](#generating-models)
+  - [Django Admin](#django-admin)
+  - [Testing our Apps](#testing-our-apps)
+  - [Working with Forms](#working-with-forms)
+  - [Working with Static Files](#working-with-static-files)
+  - [Deploy on Heroku](#deploy-on-heroku)
+
 ## Getting Started
 
 ```bash
@@ -55,7 +66,7 @@ INSTALLED_APPS = [
 
 ## Django Fundamentals
 
-At its core, django rquires a `urls.py`, `views.py`, `models.py` and an
+At its core, django requires a `urls.py`, `views.py`, `models.py` and an
 `index.html` template. A request is first matched by the `urls.py` file through
 a regular expression which specifies a view. The view in turn, accesses the
 database through the model and sends a styled template to the user. Each app has
@@ -85,9 +96,9 @@ urlpatterns = [
 
 ## Generating Models
 
-Each app has its own `models.py` file. We can create our models there. Everytime
-we update our models file we have to create a migration with `makemigrations`
-and then we run our migration with the `migrate` command.
+Each app has its own `models.py` file. We can create our models there. Every
+time we update our models file we have to create a migration with
+`makemigrations` and then we run our migration with the `migrate` command.
 
 ```bash
 python manage.py makemigrations posts
@@ -124,7 +135,7 @@ class BlogCreateView(CreateView):
 
 ```
 
-Inside our template, we can render the fields and protect againt XSS attacks as
+Inside our template, we can render the fields and protect against XSS attacks as
 follows.
 
 ```html
@@ -134,7 +145,7 @@ follows.
 </form>
 ```
 
-After submiting our form, django doesn't know where it should redirect the user
+After submitting our form, django doesn't know where it should redirect the user
 to. Thus we have to specify a url inside our database model class.
 
 ```python
