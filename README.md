@@ -3,34 +3,23 @@
 > Python is a programming language that lets you work more quickly and
 > integrate your systems more effectively. - [Python.org](https://www.python.org)
 
-- [Python](#python)
-  - [Why Python](#why-python)
-  - [My Goals with Python](#my-goals-with-python)
-  - [Learning Python](#learning-python)
-  - [Development Setup](#development-setup)
-    - [Working with pipenv](#working-with-pipenv)
-    - [Working with Docker](#working-with-docker)
-
 ## Why Python
 
 Python is one of the most versatile and popular languages. It has a wide range
-of application from web developement and data science to GUI applications,
+of application from web development and data science to GUI applications,
 scripts and game development. A lot of big companies use it daily and the
 amount of online resources is large and well documented.
 
 ## My Goals with Python
 
 Due to the large range of application for Python my main focus with this
-language revolves aronud web development and data science:
+language revolves around web development and data science:
 
-- [Django](/django)
-- [Flask](/flask)
-- [Data Science](/jupyter)
-- [Pygame](/games)
-
-## [Learning Python](/learning_python)
-
-Resources, steps and notes I take to learn python.
+- [learning python](/learning_python)
+- [django](/django)
+- [flask](/flask)
+- [data science](/jupyter)
+- [pygame](/games)
 
 ## Development Setup
 
@@ -65,7 +54,7 @@ exit
 ```
 
 We can also create scripts similar to how we would using npm/yarn.
-For that we create a new section inside the generated Pipfile called sripts
+For that we create a new section inside the generated Pipfile called scripts
 and specify the name followed by the command:
 
 ```Pipfile
