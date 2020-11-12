@@ -9,7 +9,7 @@
 ## Projects
 
 - [Create Posts with sqlite](./sqlite_posts)
-- [microblog platform](./microblog/README.md)
+- [microblog platform](./microblog/)
 
 ## Resources
 
