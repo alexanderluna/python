@@ -15,7 +15,7 @@ def main():
 
 
 def get_calender(html):
-    dates = html.findAll('rect')
+    dates = html.findAll('rect', {'data-count' : True})
     return dates
 
 
