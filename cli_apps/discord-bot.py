@@ -55,4 +55,4 @@ async def kick_error(ctx, error):
         await ctx.send("You forgot to mention the user...")
 
 
-bot.run(os.environ['TSUKI_BOT_KEY'])
+bot.run(os.environ['DC_BOT_KEY'])

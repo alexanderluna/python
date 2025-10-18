@@ -3,109 +3,45 @@
 > Python is a programming language that lets you work more quickly and
 > integrate your systems more effectively. - [Python.org](https://www.python.org)
 
-## Why Python
-
 Python is one of the most versatile and popular languages. It has a wide range
 of application from web development and data science to GUI applications,
-scripts and game development. A lot of big companies use it daily and the
-amount of online resources is large and well documented.
+scripts and game development.
 
-## My Goals with Python
+## Table of Contents
 
-Due to the large range of application for Python my main focus with this
-language revolves around web development and data science:
-
-- [learning python](/learning_python)
+- [setup & installation](#setup--installation)
+  - [learning python](/learning_python)
+- [algorithms](/algorithms/)
+- [command line interface apps](/cli_apps/)
 - [django](/django)
 - [flask](/flask)
 - [data science](/jupyter)
 - [pygame](/games)
+- [resources](#resources)
 
-## Development Setup
+## Setup & Installation
 
 In the python community it is recommended to use **virtualenv** to manage
-packages and project. While **virtualenv** is useful **pipenv** is a better
-option because it combines both pip and virtualenv into one tool. Personally,
-I find docker with named volumes to be even better and simpler to setup.
+packages and project. While **virtualenv** is useful, **uv** is an even better
+option because it combines both pip and virtualenv into one tool. First install
+[mise](https://mise.jdx.dev/getting-started.html) a front-end for development
+environments which makes it easier to install different versions of python and
+**uv**.
 
-### Working with pipenv
+``` sh
+# on Linux
+curl https://mise.run | sh
 
-``` bash
-mkdir something-new
-cd something-new
+# on MacOS
+brew install mise
 
-# create new environment with latest python3
-pipenv --three
-
-# install package
-pipenv install django
-
-# install from requirements.txt
-pipenv install -r requirements.txt
-
-# update outdated packages
-pipenv update --outdated
-
-# run a shell
-pipenv shell
-
-# finally to exit the shell just type 'exit'
-exit
+# Install python/uv and add them to your $PATH automatically
+mise use -g python@latest
+mise use -g uv@latest
 ```
 
-We can also create scripts similar to how we would using npm/yarn.
-For that we create a new section inside the generated Pipfile called scripts
-and specify the name followed by the command:
+## Resources
 
-```Pipfile
-[scripts]
-start = "python manage.py runserver"
-```
-
-```bash
-pipenv run start
-```
-
-### Working with Docker
-
-I prefer docker mainly for the reason that it is easier to get started and
-replicate. I use a docker-compose file to install the required modules and start
-a development server or run the code:
-
-```docker
-version: '3'
-
-services:
-  django:
-    image: python:3.7-alpine
-    volumes:
-     - pip37:/usr/local/lib/python3.7/site-packages
-     - .:/project
-    ports:
-      - "8000:8000"
-    working_dir: /project
-    command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - requirements
-
-  requirements:
-    image: python:3.7-alpine
-    volumes:
-      - pip37:/usr/local/lib/python3.7/site-packages
-      - .:/project
-    working_dir: /project
-    command: pip install -r requirements.txt
-
-volumes:
-  pip37:
-    external: true
-```
-
-I could run container, attach a named volume and install the packages I need
-first and then use the same named volume in my docker compose to reduce the
-number of services but this would mean more steps so I opted for the double
-service variant which can be executed with a simple:
-
-```bash
-docker-compose up
-```
+- ★★★★★ [Head First Python](https://www.oreilly.com/library/view/head-first-python/9781491919521/)
+- ★★★★★ [Python Brain Teasers](https://pragprog.com/titles/d-pybrain/python-brain-teasers/)
+- ★★☆☆☆[[Course] Udacity Programming Fundamentals with Python](https://www.udacity.com/course/programming-foundations-with-python--ud036)
