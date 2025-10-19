@@ -38,10 +38,13 @@ brew install mise
 # Install python/uv and add them to your $PATH automatically
 mise use -g python@latest
 mise use -g uv@latest
+
+# Initialize a uv project
+uv init . 
 ```
 
 ## Resources
 
 - ★★★★★ [Head First Python](https://www.oreilly.com/library/view/head-first-python/9781491919521/)
-- ★★★★★ [Python Brain Teasers](https://pragprog.com/titles/d-pybrain/python-brain-teasers/)
-- ★★☆☆☆[[Course] Udacity Programming Fundamentals with Python](https://www.udacity.com/course/programming-foundations-with-python--ud036)
+- ★★★★☆ [Python Brain Teasers](https://pragprog.com/titles/d-pybrain/python-brain-teasers/)
+- ★★☆☆☆ [[Course] Udacity Programming Fundamentals with Python](https://www.udacity.com/course/programming-foundations-with-python--ud036)
