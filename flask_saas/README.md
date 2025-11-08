@@ -28,6 +28,7 @@ is to define a `create_app` function with an optional config file as an
 argument and return a Flask app object.
 
 ```python
+# saas/app.py
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
 
@@ -37,7 +38,7 @@ def create_app():
     return app
 ```
 
-## Blueprints
+## [Blueprints](https://flask.palletsprojects.com/en/stable/blueprints/)
 
 Blueprints allows you to break up your app in components which allows you to add
 namespaces, routes and templates in a maintainable manner. You can create a
@@ -67,4 +68,54 @@ def create_app():
     app.register_blueprint(page)
 
     return app
+```
+
+## [Testing and Coverage](https://flask.palletsprojects.com/en/stable/tutorial/tests/)
+
+For testing you can use `pytest` and for coverage you can use `coverage.py` or
+`pytest-cov`.
+
+```zsh
+uv add pytest pytest-cov  
+```
+
+Now you can start configuring your tests by creating a `tests/conftest.py` file.
+You want to use the previously created App Factory and configure your `pytest`
+by creating creating a custom test app, a context for the test environment and
+push that context to the current context.
+
+```python
+import pytest
+
+from saas.app import create_app
+
+
+@pytest.yield_fixture(scope="session")
+def app():
+    params = {"DEBUG": False, "TESTING": True}
+    _app = create_app(settings_override=params)
+    ctx = _app.app_context()
+    ctx.push()
+    yield _app
+    ctx.pop()
+
+
+@pytest.yield_fixture(scope="function")
+def client(app):
+    yield app.test_client()
+```
+
+Now you can run your tests using UV or configuring your test in the
+`pyproject.toml` file.
+
+```toml
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+```
+
+```zsh
+uv run py.test tests 
+
+# if you configured your tests in pyproject.toml
+pytest --cov=saas tests
 ```
